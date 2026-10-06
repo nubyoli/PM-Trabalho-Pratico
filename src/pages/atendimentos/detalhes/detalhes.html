@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detalhes do atendimento · Sistema Hospitalar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="detalhes.css" />
+  </head>
+  <body>
+    <aside class="menu">
+      <a class="marca" href="../painel/index.html"
+        ><span class="marca-icone"
+          ><img src="../../assets/icons/estetoscopio.svg" alt=""
+        /></span>
+        Sistema Hospitalar</a
+      >
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><a href="../painel/index.html">Painel</a></li>
+        </ul>
+        <div class="grupo">
+          <input
+            class="grupo-toggle"
+            type="checkbox"
+            id="grupo-cadastros"
+            checked
+          />
+          <label class="grupo-titulo" for="grupo-cadastros">Cadastros</label>
+          <ul>
+            <li><a href="../pacientes/index.html">Pacientes</a></li>
+            <li><a href="../profissionais/index.html">Profissionais</a></li>
+            <li><a href="../quartos/index.html">Quartos</a></li>
+            <li><a href="index.html" aria-current="page">Atendimentos</a></li>
+          </ul>
+        </div>
+        <div class="grupo">
+          <input class="grupo-toggle" type="checkbox" id="grupo-agenda" />
+          <label class="grupo-titulo" for="grupo-agenda">Agenda</label>
+          <ul>
+            <li><a href="../agenda/index.html">Agenda do profissional</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sair"><a href="../../index.html">Sair</a></div>
+    </aside>
+
+    <main>
+      <div class="cabecalho">
+        <div>
+          <a class="voltar" href="index.html"
+            ><img src="../../assets/icons/seta-voltar.svg" alt="" />
+            Atendimentos</a
+          >
+          <h1>Consulta de Mariana Costa</h1>
+          <p class="subtitulo">Retorno cardiológico com Dr. Ricardo Alves</p>
+        </div>
+        <span class="status agendada">Agendada</span>
+      </div>
+
+      <section class="painel">
+        <h2>Informações do atendimento</h2>
+        <dl class="detalhes">
+          <div>
+            <dt>Paciente</dt>
+            <dd>Mariana Costa</dd>
+          </div>
+          <div>
+            <dt>CPF</dt>
+            <dd>123.456.789-00</dd>
+          </div>
+          <div>
+            <dt>Profissional</dt>
+            <dd>Dr. Ricardo Alves</dd>
+          </div>
+          <div>
+            <dt>Especialidade</dt>
+            <dd>Cardiologia</dd>
+          </div>
+          <div>
+            <dt>Tipo</dt>
+            <dd>Consulta</dd>
+          </div>
+          <div>
+            <dt>Motivo</dt>
+            <dd>Retorno cardiológico</dd>
+          </div>
+        </dl>
+      </section>
+
+      <form class="painel">
+        <h2>Editar atendimento</h2>
+        <div class="campos">
+          <div class="campo">
+            <label for="data">Data</label
+            ><input id="data" type="date" value="2026-10-06" />
+          </div>
+          <div class="campo">
+            <label for="hora">Horário</label
+            ><input id="hora" type="time" value="08:30" />
+          </div>
+          <div class="campo">
+            <label for="status">Status</label>
+            <select id="status">
+              <option selected>Agendada</option>
+              <option>Realizada</option>
+              <option>Cancelada</option>
+            </select>
+          </div>
+          <div class="campo inteiro">
+            <label for="obs">Observações médicas</label
+            ><textarea id="obs">
+Paciente relata melhora após ajuste da medicação.</textarea
+            >
+          </div>
+        </div>
+        <div class="acoes">
+          <button type="button" class="botao perigo">Cancelar consulta</button>
+          <button type="button" class="botao">Salvar alterações</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

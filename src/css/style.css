@@ -1,0 +1,437 @@
+/* Sistema Hospitalar — Sprint 1
+   Estilos gerais e reutilizáveis (cores, menu, formulários, tabelas, botões).
+   Estilos de uma tela só ficam no CSS da própria tela. */
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --tinta: #1f2d2a;
+  --tinta-suave: #5b6b67;
+  --fundo: #f4f8f6;
+  --papel: #ffffff;
+  --linha: #dfe8e4;
+  --verde: #189a6f;
+  --verde-escuro: #137d5a;
+  --verde-claro: #e7f5ef;
+  --azul: #2563a8;
+  --azul-claro: #e6eff9;
+  --ambar: #a86207;
+  --ambar-claro: #fbf0dc;
+  --vermelho: #b3261e;
+  --vermelho-claro: #fbe7e5;
+  --raio: 10px;
+  --fonte: "Public Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tinta);
+  background: var(--fundo);
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--verde-escuro);
+}
+
+/* ---------- Marca ---------- */
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--tinta);
+  text-decoration: none;
+}
+.marca-icone {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: var(--verde);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.marca-icone img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- Menu lateral ---------- */
+.menu {
+  background: var(--papel);
+  border-right: 1px solid var(--linha);
+  padding: 24px 14px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.menu .marca {
+  display: flex;
+  padding: 0;
+  margin: 0 8px 28px;
+}
+.menu .marca:hover {
+  background: none;
+}
+.menu nav {
+  flex: 1;
+}
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menu a,
+.grupo-titulo {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--tinta);
+  text-decoration: none;
+}
+.menu a:hover,
+.grupo-titulo:hover {
+  background: var(--fundo);
+}
+.menu a[aria-current="page"] {
+  background: var(--verde-claro);
+  color: var(--verde-escuro);
+  font-weight: 600;
+}
+
+/* Grupos que abrem no clique ou no hover */
+.grupo {
+  margin-top: 4px;
+}
+.grupo-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.grupo-titulo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.grupo-titulo::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--tinta-suave);
+  border-bottom: 2px solid var(--tinta-suave);
+  transform: rotate(-45deg);
+  transition: transform 0.15s;
+}
+.grupo ul {
+  display: none;
+  padding: 2px 0 6px 12px;
+}
+.grupo ul a {
+  font-size: 14px;
+}
+.grupo-toggle:checked ~ ul {
+  display: block;
+}
+.grupo-toggle:checked + .grupo-titulo::after {
+  transform: rotate(45deg);
+}
+/* No computador, passar o mouse também abre o grupo */
+@media (hover: hover) and (pointer: fine) {
+  .grupo:hover ul {
+    display: block;
+  }
+  .grupo:hover .grupo-titulo::after {
+    transform: rotate(45deg);
+  }
+}
+.grupo-toggle:focus-visible + .grupo-titulo {
+  outline: 3px solid #9fd8c2;
+}
+
+.sair {
+  border-top: 1px solid var(--linha);
+  padding-top: 12px;
+}
+.sair a {
+  color: var(--tinta-suave);
+}
+
+/* ---------- Área principal ---------- */
+main {
+  padding: 32px 40px 56px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.cabecalho > div {
+  flex: 1;
+  min-width: 0;
+}
+.cabecalho > .botao,
+.cabecalho > .status {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+h1 {
+  font-size: 28px;
+  line-height: 1.2;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-size: 18px;
+  margin: 0 0 16px;
+}
+.subtitulo {
+  color: var(--tinta-suave);
+  margin: 0;
+  max-width: 60ch;
+}
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 10px -6px;
+  padding: 4px 10px 4px 6px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.voltar img {
+  width: 22px;
+  height: 22px;
+}
+.voltar:hover {
+  background: var(--verde-claro);
+}
+.voltar:hover {
+  text-decoration: underline;
+}
+
+.painel {
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+/* ---------- Formulários ---------- */
+.campos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 20px;
+}
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.inteiro {
+  grid-column: 1 / -1;
+}
+label,
+.rotulo {
+  font-size: 14px;
+  font-weight: 600;
+}
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  background-color: #fbfdfc;
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 42px;
+  background-image: url("../assets/icons/seta-baixo.svg");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--verde);
+  outline-offset: 1px;
+  border-color: var(--verde);
+  background-color: #fff;
+}
+.dica {
+  font-size: 13px;
+  color: var(--tinta-suave);
+  margin: 0;
+}
+
+.acoes {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.botao {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--verde);
+  background: var(--verde);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+.botao:hover {
+  background: var(--verde-escuro);
+  border-color: var(--verde-escuro);
+}
+.botao.secundario {
+  background: transparent;
+  color: var(--verde-escuro);
+}
+.botao.secundario:hover {
+  background: var(--verde-claro);
+}
+.botao.perigo {
+  background: transparent;
+  color: var(--vermelho);
+  border-color: var(--vermelho);
+}
+.botao.perigo:hover {
+  background: var(--vermelho-claro);
+}
+.botao:focus-visible,
+a:focus-visible {
+  outline: 3px solid #9fd8c2;
+  outline-offset: 2px;
+}
+
+/* ---------- Filtros e tabelas ---------- */
+.filtro {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.filtro .campo {
+  min-width: 200px;
+  flex: 1;
+}
+
+.tabela-rolagem {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--linha);
+  white-space: nowrap;
+}
+th {
+  font-size: 13px;
+  color: var(--tinta-suave);
+  font-weight: 600;
+}
+tbody tr:hover {
+  background: #f8fbfa;
+}
+td a {
+  font-weight: 600;
+}
+
+.status {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+.status.agendada {
+  background: var(--azul-claro);
+  color: var(--azul);
+}
+.status.realizada,
+.status.disponivel {
+  background: var(--verde-claro);
+  color: var(--verde-escuro);
+}
+.status.cancelada,
+.status.ocupado {
+  background: var(--vermelho-claro);
+  color: var(--vermelho);
+}
+.status.ativa {
+  background: var(--ambar-claro);
+  color: var(--ambar);
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  body {
+    grid-template-columns: 1fr;
+  }
+  .menu {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--linha);
+    padding: 16px;
+  }
+  .menu .marca {
+    margin-bottom: 12px;
+  }
+  main {
+    padding: 24px 16px 40px;
+  }
+  .cabecalho {
+    flex-wrap: wrap;
+  }
+  .campos {
+    grid-template-columns: 1fr;
+  }
+}

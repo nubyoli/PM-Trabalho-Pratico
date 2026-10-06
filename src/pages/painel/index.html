@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel · Sistema Hospitalar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="painel.css" />
+  </head>
+  <body>
+    <aside class="menu">
+      <a class="marca" href="index.html"
+        ><span class="marca-icone"
+          ><img src="../../assets/icons/estetoscopio.svg" alt=""
+        /></span>
+        Sistema Hospitalar</a
+      >
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><a href="index.html" aria-current="page">Painel</a></li>
+        </ul>
+        <div class="grupo">
+          <input
+            class="grupo-toggle"
+            type="checkbox"
+            id="grupo-cadastros"
+            checked
+          />
+          <label class="grupo-titulo" for="grupo-cadastros">Cadastros</label>
+          <ul>
+            <li><a href="../pacientes/index.html">Pacientes</a></li>
+            <li><a href="../profissionais/index.html">Profissionais</a></li>
+            <li><a href="../quartos/index.html">Quartos</a></li>
+            <li><a href="../atendimentos/index.html">Atendimentos</a></li>
+          </ul>
+        </div>
+        <div class="grupo">
+          <input class="grupo-toggle" type="checkbox" id="grupo-agenda" />
+          <label class="grupo-titulo" for="grupo-agenda">Agenda</label>
+          <ul>
+            <li><a href="../agenda/index.html">Agenda do profissional</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="sair"><a href="../../index.html">Sair</a></div>
+    </aside>
+
+    <main>
+      <div class="cabecalho">
+        <div>
+          <h1>Painel</h1>
+          <p class="subtitulo">
+            Resumo do hospital hoje e acesso rápido às principais tarefas.
+          </p>
+        </div>
+      </div>
+
+      <section class="resumo" aria-label="Resumo do dia">
+        <div class="painel">
+          <strong>14</strong><span>consultas agendadas hoje</span>
+        </div>
+        <div class="painel">
+          <strong>9</strong><span>pacientes internados</span>
+        </div>
+        <div class="painel"><strong>6</strong><span>leitos livres</span></div>
+      </section>
+
+      <section class="painel">
+        <h2>Acesso rápido</h2>
+        <div class="atalhos">
+          <a class="atalho" href="../pacientes/index.html"
+            ><b>Pacientes</b><small>Cadastro, contato e endereço</small></a
+          >
+          <a class="atalho" href="../profissionais/index.html"
+            ><b>Profissionais</b
+            ><small>Registro profissional e especialidade</small></a
+          >
+          <a class="atalho" href="../quartos/index.html"
+            ><b>Quartos</b><small>Capacidade, andar e ocupação</small></a
+          >
+          <a class="atalho" href="../atendimentos/index.html"
+            ><b>Atendimentos</b
+            ><small>Consultas, internações e histórico</small></a
+          >
+        </div>
+      </section>
+
+      <section class="painel">
+        <h2>Próximas consultas</h2>
+        <div class="tabela-rolagem">
+          <table>
+            <thead>
+              <tr>
+                <th>Horário</th>
+                <th>Paciente</th>
+                <th>Profissional</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>08:30</td>
+                <td>Mariana Costa</td>
+                <td>Dr. Ricardo Alves</td>
+                <td><span class="status agendada">Agendada</span></td>
+                <td><a href="../atendimentos/detalhes.html">Detalhes</a></td>
+              </tr>
+              <tr>
+                <td>09:00</td>
+                <td>João Pereira</td>
+                <td>Dra. Fernanda Lima</td>
+                <td><span class="status agendada">Agendada</span></td>
+                <td><a href="../atendimentos/detalhes.html">Detalhes</a></td>
+              </tr>
+              <tr>
+                <td>10:15</td>
+                <td>Ana Souza</td>
+                <td>Dr. Ricardo Alves</td>
+                <td><span class="status cancelada">Cancelada</span></td>
+                <td><a href="../atendimentos/detalhes.html">Detalhes</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

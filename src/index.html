@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Entrar · Sistema Hospitalar</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body class="pagina-login">
+    <main class="login">
+      <a class="marca" href="pages/painel/index.html"
+        ><span class="marca-icone"
+          ><img src="assets/icons/estetoscopio.svg" alt=""
+        /></span>
+        Sistema Hospitalar</a
+      >
+      <h1>Entrar</h1>
+      <p class="subtitulo">Acesse com seu CPF e senha.</p>
+      <form action="pages/painel/index.html">
+        <div class="campo">
+          <label for="usuario">CPF</label
+          ><input id="usuario" type="text" placeholder="000.000.000-00" />
+        </div>
+        <div class="campo">
+          <label for="senha">Senha</label
+          ><input id="senha" type="password" placeholder="Sua senha" />
+        </div>
+        <button type="submit" class="botao">Entrar</button>
+      </form>
+      <p class="dica">
+        Nesta versão é possível entrar sem preencher os campos.
+      </p>
+    </main>
+  </body>
+</html>

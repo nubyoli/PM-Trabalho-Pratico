@@ -1,0 +1,37 @@
+/* Tela de login — usado só por index.html */
+
+body.pagina-login {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(160deg, var(--verde-claro), var(--fundo) 60%);
+}
+.login {
+  width: 100%;
+  max-width: 400px;
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 36px 32px;
+}
+.login .marca {
+  margin-bottom: 28px;
+}
+.login h1 {
+  font-size: 24px;
+}
+.login .subtitulo {
+  margin-bottom: 24px;
+}
+.login .campo {
+  margin-bottom: 16px;
+}
+.login .botao {
+  width: 100%;
+  margin-top: 8px;
+}
+.login .dica {
+  text-align: center;
+  margin-top: 16px;
+}

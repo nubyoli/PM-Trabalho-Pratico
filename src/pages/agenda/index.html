@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Pacientes · Sistema Hospitalar</title>
+    <title>Agenda do profissional · Sistema Hospitalar</title>
     <link rel="stylesheet" href="../../css/style.css" />
   </head>
   <body>
@@ -27,7 +27,7 @@
           />
           <label class="grupo-titulo" for="grupo-cadastros">Cadastros</label>
           <ul>
-            <li><a href="index.html" aria-current="page">Pacientes</a></li>
+            <li><a href="../pacientes/index.html">Pacientes</a></li>
             <li><a href="../profissionais/index.html">Profissionais</a></li>
             <li><a href="../quartos/index.html">Quartos</a></li>
             <li><a href="../atendimentos/index.html">Atendimentos</a></li>
@@ -37,7 +37,11 @@
           <input class="grupo-toggle" type="checkbox" id="grupo-agenda" />
           <label class="grupo-titulo" for="grupo-agenda">Agenda</label>
           <ul>
-            <li><a href="../agenda/index.html">Agenda do profissional</a></li>
+            <li>
+              <a href="index.html" aria-current="page"
+                >Agenda do profissional</a
+              >
+            </li>
           </ul>
         </div>
       </nav>
@@ -47,58 +51,69 @@
     <main>
       <div class="cabecalho">
         <div>
-          <h1>Pacientes</h1>
-          <p class="subtitulo">Pacientes cadastrados no hospital.</p>
+          <h1>Agenda do profissional</h1>
+          <p class="subtitulo">
+            Atendimentos sob responsabilidade do profissional selecionado.
+          </p>
         </div>
-        <a class="botao" href="cadastro.html">Cadastrar paciente</a>
       </div>
 
       <section class="painel">
         <form class="filtro">
           <div class="campo">
-            <label for="busca">Buscar</label
-            ><input id="busca" type="search" placeholder="Nome ou CPF" />
+            <label for="f-prof">Profissional</label>
+            <select id="f-prof">
+              <option>Dr. Ricardo Alves (Cardiologia)</option>
+              <option>Dra. Fernanda Lima (Clínica geral)</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="f-dia">Data</label
+            ><input id="f-dia" type="date" value="2026-10-06" />
           </div>
         </form>
         <div class="tabela-rolagem">
           <table>
             <thead>
               <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Telefone</th>
-                <th>E-mail</th>
+                <th>Horário</th>
+                <th>Paciente</th>
+                <th>Tipo</th>
+                <th>Motivo</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td>08:30</td>
                 <td>Mariana Costa</td>
-                <td>123.456.789-00</td>
-                <td>(31) 98888-1111</td>
-                <td>mariana@email.com</td>
-                <td><a href="../atendimentos/index.html">Histórico</a></td>
+                <td>Consulta</td>
+                <td>Retorno cardiológico</td>
+                <td><span class="status agendada">Agendada</span></td>
+                <td>
+                  <a href="../atendimentos/detalhes/detalhes.html">Detalhes</a>
+                </td>
               </tr>
               <tr>
-                <td>João Pereira</td>
-                <td>987.654.321-00</td>
-                <td>(31) 97777-2222</td>
-                <td>joao@email.com</td>
-                <td><a href="../atendimentos/index.html">Histórico</a></td>
-              </tr>
-              <tr>
+                <td>10:15</td>
                 <td>Ana Souza</td>
-                <td>456.789.123-00</td>
-                <td>(31) 96666-3333</td>
-                <td>ana@email.com</td>
-                <td><a href="../atendimentos/index.html">Histórico</a></td>
+                <td>Consulta</td>
+                <td>Check-up</td>
+                <td><span class="status cancelada">Cancelada</span></td>
+                <td>
+                  <a href="../atendimentos/detalhes/detalhes.html">Detalhes</a>
+                </td>
               </tr>
               <tr>
+                <td>14:00</td>
                 <td>Carlos Mendes</td>
-                <td>321.654.987-00</td>
-                <td>(31) 95555-0000</td>
-                <td>carlos@email.com</td>
-                <td><a href="../atendimentos/index.html">Histórico</a></td>
+                <td>Consulta</td>
+                <td>Palpitações</td>
+                <td><span class="status realizada">Realizada</span></td>
+                <td>
+                  <a href="../atendimentos/detalhes/detalhes.html">Detalhes</a>
+                </td>
               </tr>
             </tbody>
           </table>

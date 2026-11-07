@@ -18,7 +18,7 @@ Esta sprint contempla a modelagem inicial e o front-end **sem funcionalidade**.
 | Entrega | Descrição |
 |---|---|
 | Front-end | Telas em HTML e CSS puros, sem framework e sem JavaScript |
-| Diagrama de Classes UML | [UML](doc/UML-TP1-PM.jpg) |
+| Diagrama de Classes UML | [UML](doc/UML-TP1-PM.png) |
 | Cartões CRC | [Responsabilidades e colaborações de cada classe](doc/Cartoes_CRC_Sistema_Hospitalar.pdf) |
 | Wireframe | [Protótipo no Figma](https://www.figma.com/design/lbml8jFXtkNnZKFsCsCHJQ) (também em [Wireframe PDF](doc/Wireframe_Sprint1.pdf)) |
 

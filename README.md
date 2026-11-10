@@ -29,7 +29,7 @@ Esta sprint contempla a modelagem inicial e o front-end **sem funcionalidade**.
 - Nenhum HTML usa `style` inline.
 - Ícones e imagens ficam em `assets/`.
 
-## Como executar
+## Como executar o front-end
 
 Não é necessário instalar nada.
 
@@ -62,10 +62,81 @@ As principais classes do sistema são:
 5. Um quarto não pode ultrapassar sua capacidade máxima.
 6. O sistema mantém o histórico de consultas e internações dos pacientes.
 
+## Sprint 2
+
+Classes de domínio, regras de negócio e API REST com Spring Boot, na pasta [`api/`](api).
+
+| Entrega | Onde está |
+|---|---|
+| 1. Diagrama de Classes atualizado | [UML](doc/UML-TP1-PM.png) |
+| 2. Classes de domínio | [`model`](api/src/main/java/br/pucminas/hospital/model) |
+| 3. Endpoints | [`controller`](api/src/main/java/br/pucminas/hospital/controller) |
+| 4. Regras de negócio | Nas classes de `model` e nos `service` |
+
+### Como executar a API
+
+O build é feito pelo VS Code. Requer o JDK 17 ou mais novo.
+
+1. Instale no VS Code a extensão **Extension Pack for Java** (da Microsoft).
+2. Abra a pasta `api` em **File → Open Folder** e espere a extensão carregar o projeto Maven e baixar as dependências.
+3. Abra `src/main/java/br/pucminas/hospital/SistemaHospitalarApplication.java` e clique em **Run** acima do método `main`.
+
+A API sobe em `http://localhost:8080`. O banco desta sprint é o H2 em memória (console em `/h2-console`, JDBC URL `jdbc:h2:mem:hospital`, usuário `sa`).
+
+### Estrutura
+
+```
+api/src/main/java/br/pucminas/hospital
+├── controller   → endpoints REST
+├── service      → casos de uso
+├── repository   → acesso aos dados (Spring Data JPA)
+└── model        → classes do diagrama e enums
+```
+
+### Endpoints
+
+| Recurso | Operações |
+|---|---|
+| `/pacientes` | `GET`, `GET /{id}`, `POST`, `PUT /{id}`, `DELETE /{id}`, `GET /{id}/historico` |
+| `/profissionais` | `GET` (filtros `?especialidade=` e, para ver quem está livre, `&data=&horario=`), `GET /{id}`, `POST`, `PUT /{id}`, `DELETE /{id}`, `GET /{id}/disponibilidade?data=&horario=`, `GET` e `POST /{id}/procedimentos`, `PATCH /{id}/procedimentos/{procedimentoId}/iniciar`, `/concluir`, `/cancelar` |
+| `/consultas` | `GET` (filtro `?status=`), `GET /{id}`, `POST`, `PATCH /{id}/confirmar`, `/iniciar`, `/observacoes`, `/concluir`, `/cancelar`, `/nao-compareceu`, `/encaminhar?especialidade=`; emergências em `GET` e `POST /emergencias`, `PATCH /emergencias/{id}/iniciar`, `/concluir` |
+| `/internacoes` | `GET` (filtro `?ativas=`), `GET /{id}`, `POST`, `PATCH /{id}/alta` |
+| `/quartos` | `GET` (filtro `?situacao=`), `GET /{id}`, `POST`, `PUT /{id}`, `DELETE /{id}` |
+
+No `POST /profissionais`, o campo `categoria` define o tipo: `CLINICO_GERAL`, `ESPECIALISTA` (com `especialidade`) ou `CIRURGIAO` (com `areaCirurgica`). No `POST /consultas`, o campo `tipo` é `ROTINA` ou `ESPECIALIZADA`. Violações de regra retornam `400` com a mensagem do motivo; registros inexistentes retornam `404`.
+
+### Regras de negócio
+
+**Categorias de profissionais**
+
+1. Consulta de rotina só com clínico geral; consulta especializada só com especialista da mesma área; procedimento cirúrgico só com cirurgião.
+2. O clínico geral encaminha o paciente que está em consulta de rotina com ele para uma especialidade.
+3. Profissionais podem ser consultados por área de atuação.
+
+**Modalidades de atendimento**
+
+4. Cada modalidade sobrescreve `validarCondicoes()` com suas próprias verificações, aproveitando as comuns de `Atendimento`.
+5. Um profissional não pode ter dois atendimentos no mesmo horário (consultas canceladas ou sem comparecimento e procedimentos cancelados liberam o horário).
+6. Não é possível agendar consultas ou procedimentos no passado. Um procedimento que já aconteceu é registrado com a data e hora efetivas e entra direto como `CONCLUIDO`.
+7. Emergências exigem prioridade (`BAIXA`, `MODERADA`, `ALTA`, `CRITICA`), seguem `AGUARDANDO_AVALIACAO → EM_ATENDIMENTO → CONCLUIDO` e são listadas da maior para a menor prioridade.
+
+**Situação das consultas**
+
+8. Transições permitidas: `AGENDADA → CONFIRMADA → EM_ATENDIMENTO → CONCLUIDA`, e `AGENDADA`/`CONFIRMADA → CANCELADA` ou `NAO_COMPARECEU`. Qualquer outra é recusada; uma consulta cancelada só volta a acontecer com um novo agendamento.
+9. Observações só podem ser registradas durante ou depois da consulta.
+
+**Procedimentos cirúrgicos**
+
+10. Situações: `AGENDADO → EM_ANDAMENTO → CONCLUIDO`, ou `AGENDADO → CANCELADO`. Não é possível concluir um procedimento que não foi iniciado. Ao iniciar, a data e hora efetivas são registradas.
+
+**Tipos de quarto e internações**
+
+11. Leitos por tipo: `ENFERMARIA` de 2 a 6, `APARTAMENTO` de 1 a 2, `UTI` 1.
+12. A internação só ocorre em quarto com vaga; a situação do quarto é atualizada a cada entrada e alta.
+13. Um paciente não pode ter duas internações ativas, e as datas de alta não podem ser anteriores à entrada.
+
 ## Próximas sprints
 
-- API REST com Spring Boot, em arquitetura de camadas (Controller, Service, Repository e Model)
-- Persistência em banco de dados
-- Tratamento de exceções
-- Testes automatizados
+- Persistência em banco de dados relacional (MySQL/PostgreSQL)
+- Ampliação dos testes automatizados
 - Integração do front-end com a API

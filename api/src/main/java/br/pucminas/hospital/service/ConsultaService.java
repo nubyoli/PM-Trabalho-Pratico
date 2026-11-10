@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
@@ -48,6 +49,9 @@ public class ConsultaService {
     public Consulta agendar(Consulta consulta, Long pacienteId, Long profissionalId) {
         preencher(consulta, pacienteId, profissionalId);
         consulta.validarCondicoes();
+        if (LocalDateTime.of(consulta.getData(), consulta.getHorario()).isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Não é possível agendar uma consulta no passado.");
+        }
         if (!consulta.getProfissional().estaDisponivel(consulta.getData(), consulta.getHorario())) {
             throw new IllegalStateException(consulta.getProfissional().getNome() + " já possui um atendimento nesse horário.");
         }

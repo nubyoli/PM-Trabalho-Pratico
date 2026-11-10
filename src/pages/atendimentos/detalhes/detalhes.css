@@ -1,0 +1,25 @@
+/* Detalhes do atendimento — usado só por pages/atendimentos/detalhes/detalhes.html */
+
+.detalhes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0;
+}
+.detalhes div {
+  margin: 0;
+}
+.detalhes dt {
+  font-size: 13px;
+  color: var(--tinta-suave);
+}
+.detalhes dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .detalhes {
+    grid-template-columns: 1fr;
+  }
+}

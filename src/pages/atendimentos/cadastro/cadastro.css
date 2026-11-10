@@ -1,0 +1,52 @@
+/* Cadastro de atendimento — alternância Consulta / Internação feita só com CSS */
+
+.tipo-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.alternador {
+  display: inline-flex;
+  background: var(--fundo);
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+.alternador label {
+  padding: 8px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  color: var(--tinta-suave);
+}
+#tipo-consulta:checked ~ .alternador label[for="tipo-consulta"],
+#tipo-internacao:checked ~ .alternador label[for="tipo-internacao"] {
+  background: var(--papel);
+  color: var(--verde-escuro);
+  box-shadow: 0 1px 3px rgba(31, 45, 42, 0.12);
+}
+#tipo-consulta:focus-visible ~ .alternador label[for="tipo-consulta"],
+#tipo-internacao:focus-visible ~ .alternador label[for="tipo-internacao"] {
+  outline: 3px solid #9fd8c2;
+}
+.so-internacao {
+  display: none;
+}
+#tipo-internacao:checked ~ .so-consulta {
+  display: none;
+}
+#tipo-internacao:checked ~ .so-internacao {
+  display: grid;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 20px;
+}
+legend {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 14px;
+  padding: 0;
+}
